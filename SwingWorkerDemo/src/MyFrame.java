@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
 
 /**
  * Demo using SwingWorkers do the time consuming task in the other thread, so it
@@ -24,7 +25,7 @@ public class MyFrame extends JFrame {
 
 	private JPanel contentPane;
 	private SwingWorker<StringBuilder, String> worker;
-
+	private JScrollPane scrollPane;
 	private JTextArea textArea;
 
 	/**
@@ -50,10 +51,6 @@ public class MyFrame extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout(0, 0));
 
-		// Add TextArea in the center
-		textArea = new JTextArea();
-		panel.add(textArea, BorderLayout.CENTER);
-
 		// Add Button at the bottom
 		JButton btnNewButton = new JButton("Start");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -63,6 +60,12 @@ public class MyFrame extends JFrame {
 			}
 		});
 		panel.add(btnNewButton, BorderLayout.SOUTH);
+		
+		scrollPane = new JScrollPane();
+		panel.add(scrollPane, BorderLayout.CENTER);
+		
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
 
 		return panel;
 	}
